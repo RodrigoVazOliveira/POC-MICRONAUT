@@ -2,8 +2,7 @@ package com.example.usuario;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.*;
 
 import javax.inject.Inject;
 
@@ -13,8 +12,15 @@ public class UsuarioRestController {
     @Inject
     private UsuarioService usuarioService;
 
-    @Get
-    public HttpResponse<Usuario> home() {
-        return HttpResponse.status(HttpStatus.CREATED).body(usuarioService.gerarUsuario());
+    @Post
+    public HttpResponse<Usuario> cadastrarNovoUsuario(@Body Usuario usuario) {
+        Usuario usuarioResposta = usuarioService.cadastrarNovoUsuario(usuario)
+        return HttpResponse.status(HttpStatus.CREATED).body(usuarioResposta);
+    }
+
+    @Put
+    public HttpResponse<Usuario> atualizarTodoUsuario(@Body Usuario usuario) {
+        Usuario usuarioAtualizado = usuarioService.atualizarTodoUsuario(usuario);
+        return HttpResponse.status(HttpStatus.CREATED).body(usuarioAtualizado);
     }
 }
