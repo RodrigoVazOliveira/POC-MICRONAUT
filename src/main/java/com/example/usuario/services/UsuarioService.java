@@ -1,7 +1,7 @@
-package com.example.usuario;
+package com.example.usuario.services;
 
-import io.micronaut.context.annotation.Bean;
-import io.micronaut.runtime.context.scope.ThreadLocal;
+import com.example.usuario.domain.Usuario;
+import com.example.usuario.repositories.UsuarioRepository;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

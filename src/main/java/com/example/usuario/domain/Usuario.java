@@ -1,4 +1,4 @@
-package com.example.usuario;
+package com.example.usuario.domain;
 
 import javax.persistence.*;
 
