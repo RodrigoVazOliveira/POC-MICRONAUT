@@ -3,18 +3,16 @@ package com.example.usuario;
 import io.micronaut.context.annotation.Bean;
 import io.micronaut.runtime.context.scope.ThreadLocal;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class UsuarioService {
 
-    private Usuario usuario;
+    @Inject
+    private UsuarioRepository usuarioRepository;
 
-    public Usuario gerarUsuario() {
-        usuario = new Usuario();
-        usuario.setId(1L);
-        usuario.setNomeCompleto("Rodrigo Vaz");
-        usuario.setEmail("rodrigo.vaz@zup.com.br");
-        return usuario;
+    public Usuario cadastrarNovoUsuario(Usuario novoUsuario) {
+        return usuarioRepository.save(novoUsuario);
     }
 }
