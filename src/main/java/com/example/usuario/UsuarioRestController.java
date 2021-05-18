@@ -14,7 +14,7 @@ public class UsuarioRestController {
 
     @Post
     public HttpResponse<Usuario> cadastrarNovoUsuario(@Body Usuario usuario) {
-        Usuario usuarioResposta = usuarioService.cadastrarNovoUsuario(usuario)
+        Usuario usuarioResposta = usuarioService.cadastrarNovoUsuario(usuario);
         return HttpResponse.status(HttpStatus.CREATED).body(usuarioResposta);
     }
 
@@ -31,7 +31,14 @@ public class UsuarioRestController {
     }
 
     @Patch
-    public Void atualizarUsuarioParcialmente(@Body Usuario usuario) {
+    public HttpResponse<Void> atualizarUsuarioParcialmente(@Body Usuario usuario) {
         usuarioService.atualizarUsuarioParcialmente(usuario);
+        return HttpResponse.status(HttpStatus.NO_CONTENT);
+    }
+
+    @Delete("/{id}/")
+    public HttpResponse<Void> excluirUsuarioPorId(@PathVariable Long id) {
+        usuarioService.excluirUsuarioPeloId(id);
+        return HttpResponse.status(HttpStatus.NO_CONTENT);
     }
 }

@@ -22,7 +22,7 @@ public class UsuarioService {
         usuarioSalvo.setNomeCompleto(usuario.getNomeCompleto());
         usuarioSalvo.setEmail(usuario.getEmail());
 
-        return usuarioRepository.save(usuarioSalvo);
+        return usuarioRepository.update(usuarioSalvo);
     }
 
     public Usuario procurarUsuarioPeloId(Long id) {
@@ -39,7 +39,7 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Void atualizarUsuarioParcialmente(Usuario usuario) {
+    public void atualizarUsuarioParcialmente(Usuario usuario) {
         Usuario usuarioSalvo = procurarUsuarioPeloId(usuario.getId());
 
         if (usuario.getNomeCompleto() != null) {
@@ -50,7 +50,7 @@ public class UsuarioService {
             usuarioSalvo.setEmail(usuario.getEmail());
         }
 
-        usuarioRepository.save(usuarioSalvo);
+        usuarioRepository.update(usuarioSalvo);
     }
 
     public void excluirUsuarioPeloId(Long id) {
