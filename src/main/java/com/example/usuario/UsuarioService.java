@@ -18,7 +18,11 @@ public class UsuarioService {
     }
 
     public Usuario atualizarTodoUsuario(Usuario usuario) {
+        Usuario usuarioSalvo = procurarUsuarioPeloId(usuario.getId());
+        usuarioSalvo.setNomeCompleto(usuario.getNomeCompleto());
+        usuarioSalvo.setEmail(usuario.getEmail());
 
+        return usuarioRepository.save(usuarioSalvo);
     }
 
     public Usuario procurarUsuarioPeloId(Long id) {
