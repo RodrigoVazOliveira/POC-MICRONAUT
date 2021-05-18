@@ -38,4 +38,18 @@ public class UsuarioService {
     public Iterable<Usuario> obterTodosUsuarios() {
         return usuarioRepository.findAll();
     }
+
+    public Usuario atualizarUsuarioParcialmente(Usuario usuario) {
+        Usuario usuarioSalvo = procurarUsuarioPeloId(usuario.getId());
+
+        if (usuario.getNomeCompleto() != null) {
+            usuarioSalvo.setNomeCompleto(usuario.getNomeCompleto());
+        }
+
+        if (usuario.getEmail() != null) {
+            usuarioSalvo.setEmail(usuario.getEmail());
+        }
+
+        return usuarioRepository.save(usuarioSalvo);
+    }
 }
