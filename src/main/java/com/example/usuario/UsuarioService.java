@@ -34,4 +34,8 @@ public class UsuarioService {
 
         return optionalUsuario.get();
     }
+
+    public Iterable<Usuario> obterTodosUsuarios() {
+        return usuarioRepository.findAll();
+    }
 }

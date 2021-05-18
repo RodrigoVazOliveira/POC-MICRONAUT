@@ -23,4 +23,10 @@ public class UsuarioRestController {
         Usuario usuarioAtualizado = usuarioService.atualizarTodoUsuario(usuario);
         return HttpResponse.status(HttpStatus.CREATED).body(usuarioAtualizado);
     }
+
+    @Get
+    public HttpResponse<Iterable<Usuario>> mostrarTodosUsuarios() {
+        Iterable<Usuario> usuarios = usuarioService.obterTodosUsuarios();
+        return HttpResponse.status(HttpStatus.OK).body(usuarios);
+    }
 }
