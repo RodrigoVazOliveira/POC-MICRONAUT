@@ -52,4 +52,9 @@ public class UsuarioService {
 
         usuarioRepository.save(usuarioSalvo);
     }
+
+    public void excluirUsuarioPeloId(Long id) {
+        Usuario usuario = procurarUsuarioPeloId(id);
+        usuarioRepository.delete(usuario);
+    }
 }
