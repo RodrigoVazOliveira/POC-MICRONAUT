@@ -1,0 +1,492 @@
+ls
+create database thomas;
+create database thomas
+;
+\q
+create schema escola;
+create schema oi;
+create schema escola;
+drop schema escola;
+SELECT * FROM public.produto 
+;
+\d+ public.produto
+q
+\q
+\c
+\d
+\l
+\c bd1
+\l
+\s
+\dn
+\q
+SELECT * FROM public.bicicletas
+\db 
+\h
+SHOW SCHEMA;
+\?
+SHOW search_path;
+SET search_path TO public;
+\db
+\dp
+\d bicicletas;
+\d bicicletas;
+SELECT * FROM bicicletas;
+\q
+\q
+ls
+SHOW SCHEMAS;
+\ds;
+\D
+\d
+\db
+\h
+\?
+\dn
+CREATE SCHEMA Universidade;
+\dn
+\?
+SHOW search_path;
+SET search_path TO Universidade;
+SHOW search_path;
+CREATE TABLE curso (
+num_curso INTEGER NOT NULL,
+nome VARCHAR(70) NOT NULL,
+total_creditos DOUBLE NOT NULL,
+CONSTRAINT cursopk PRIMARY KEY (num_curso)
+);
+CREATE TABLE curso (
+num_curso INTEGER NOT NULL,
+nome VARCHAR(70) NOT NULL,
+total_creditos FLOAT NOT NULL,
+CONSTRAINT cursopk PRIMARY KEY (num_curso)
+);
+\dt
+\d
+\d curso;
+CREATE TABLE professor ( \
+;.
+CREATE TABLE professor (
+num_func INTEGER NOT NULL,
+nome VARCHAR(80) NOT NULL,
+admissao DATE NOT NULL,
+area_pesquisa VARCHAR(255) NOT NULL,
+CONSTRAINT professorpk PRIMARY KEY (num_func)
+);
+CREATE TABLE professor (
+num_func INTEGER NOT NULL,
+nome VARCHAR(80) NOT NULL,
+admissao DATE NOT NULL,
+area_pesquisa VARCHAR(255) NOT NULL,
+CONSTRAINT professorpk PRIMARY KEY (num_func)
+);
+\DT
+\dt
+\d professor;
+\dt curso 
+CREATE TABLE disciplina (
+num_disp INTEGER NOT NULL,
+nome VARCHAR(50) NOT NULL,
+quant_creditos FLOAT NOT NULL,
+CONSTRAINT disciplinapk PRIMARY KEY (num_disp)
+);
+\dt
+\d professor
+\d disciplina
+CREATE TABLE aluno (
+num_aluno INTEGER NOT NULL,
+nome VARCHAR(80) NOT NULL,
+endereco VARCHAR(255) NOT NULL,
+cidade VARCHAR(50) NOT NULL,
+telefone VARCHAR(25) NOT NULL,
+num_curso INTEGER NOT NULL,
+CONSTRAINT alunopk PRIMARY KEY (num_aluno),
+CONSTRAINT estrangeira_curso FOREIGN KEY 
+(num_curso) REFERENCES curso (num_curso) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+\dt
+\d aluno;
+CREATE TABLE disciplina_curso (
+num_disp INTEGER NOT NULL,
+num_curso INTEGER NOT NULL,
+CONSTRAINT estrangeira_disciplina FOREIGN KEY
+(num_disp) REFERENCES disciplina(num_disp) ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT estrangeira_curso FOREIGN KEY (num_curso)
+REFERENCES curso(num_curso) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+\dt
+\dt disciplina_curso 
+\d disciplina_curso 
+CREATE TABLE aula (
+num_aluno INTEGER NOT NULL,
+num_disp INTEGER NOT NULL,
+num_func INTEGER NOT NULL,
+semestre SMALLINT NOT NULL,
+nota FLOAT NOT NULL,
+CONSTRAINT estrangeira_aluno FOREIGN KEY (num_aluno) REFERENCES aluno(num_aluno),
+CONSTRAINT estrangeira_disciplina FOREIGN KEY (num_disp) REFERENCES disciplina(num_disp),
+CONSTRAINT estrangeira_professor FOREIGN KEY (num_func) REFERENCES professor(num_func)
+);
+\DT
+\dt
+DROP TABLE disciplina;
+DROP TABLE disciplina_curso 
+DROP TABLE aula 
+DROP TABLE aluno 
+\dt
+;
+\dt
+DROP TABLE aula;
+\dt
+drop table disciplina_curso;
+\dt
+DROP TABLE disciplina;
+\dt
+DROP TABLE aluno;
+DROP TABLE curso;
+DROP TABLE professor;
+CREATE TABLE curso (                                                                       
+ num_curso INTEGER NOT NULL,                                                                               
+ nome VARCHAR(70) NOT NULL,                                                                                
+ total_creditos NUMERIC DEFAULT 100.00,                                                                            
+ CONSTRAINT cursopk PRIMARY KEY (num_curso)                                                                
+); 
+CREATE TABLE professor (                                                                   
+ num_func INTEGER NOT NULL,                                                                                
+ nome VARCHAR(80) NOT NULL,                                                                                
+ admissao DATE NOT NULL,                                                                                   
+ area_pesquisa VARCHAR(255) NOT NULL,                                                                      
+ CONSTRAINT professorpk PRIMARY KEY (num_func)                                                             
+); 
+CREATE TABLE disciplina (
+ num_disp INTEGER NOT NULL,
+ nome VARCHAR(50) NOT NULL,
+ quant_creditos NUMERIC DEFAULT 2000.00,
+ CONSTRAINT disciplinapk PRIMARY KEY (num_disp)
+);
+CREATE TABLE aluno (
+ num_aluno INTEGER NOT NULL,
+ nome VARCHAR(80) NOT NULL,
+ endereco VARCHAR(255) NOT NULL,
+ cidade VARCHAR(50) NOT NULL,
+ telefone VARCHAR(25) NOT NULL,
+ num_curso INTEGER NOT NULL,
+ CONSTRAINT alunopk PRIMARY KEY (num_aluno),
+ CONSTRAINT estrangeira_curso 
+ FOREIGN KEY (num_curso) 
+  REFERENCES curso (num_curso) 
+  ON UPDATE NO ACTION 
+  ON DELETE NO ACTION
+);
+CREATE TABLE disciplina_curso (
+ num_disp INTEGER NOT NULL,
+ num_curso INTEGER NOT NULL,
+ CONSTRAINT estrangeira_disciplina FOREIGN KEY (num_disp) 
+      REFERENCES disciplina(num_disp) 
+      ON UPDATE NO ACTION 
+      ON DELETE NO ACTION,
+ CONSTRAINT estrangeira_curso FOREIGN KEY (num_curso)
+     REFERENCES curso(num_curso) 
+     ON UPDATE NO ACTION 
+     ON DELETE NO ACTION
+);
+CREATE TABLE aula (
+ num_aluno INTEGER NOT NULL,
+ num_disp INTEGER NOT NULL,
+ num_func INTEGER NOT NULL,
+ semestre SMALLINT NOT NULL,
+ nota NUMERIC CHECK (nota > 60.00),
+ CONSTRAINT estrangeira_aluno FOREIGN KEY (num_aluno) REFERENCES aluno(num_aluno),
+ CONSTRAINT estrangeira_disciplina FOREIGN KEY (num_disp) REFERENCES disciplina(num_disp),
+ CONSTRAINT estrangeira_professor FOREIGN KEY (num_func) REFERENCES professor(num_func)
+);
+\d aluno;
+ALTER TABLE aluno ALTER nome TYPE VARCHAR(70);
+\d aluno;
+ALTER TABLE curso RENAME quant_creditos TO qtd_creditos;
+ALTER TABLE curso RENAME quant_creditos TO qtd_creditos;
+\d curso;
+ALTER TABLE disciplina RENAME quant_creditos TO qtd_creditos;
+\d disciplina;
+\dt;
+\d aula 
+\dt
+\d professor;
+ALTER TABLE professor ALTER nome NULL;
+ALTER TABLE professor ALTER nome;
+ALTER TABLE professor ALTER nome TYPE null;
+ALTER TABLE professor ALTER nome DROP NOT NULL;
+\d professor;
+\q
+\l
+\c universidade;
+\dn
+SET search_path TO universidade;
+\t
+\dt
+\i /home/thomas/Downloads/Universidade.sql 
+SELECT * FROM cursos;
+SELECT * FROM curso;
+\dt curos;
+\dt curso;
+\d curso;
+SELECT numcurso, nome, totalcreditos FROM curso;
+\dt
+\dt aluno
+\d+ curso;
+\q
+\dt
+\d
+\l
+SHOW SCHEMAS;
+SELECT schema_name
+FROM information_schema.schemata;
+SET search_path TO universidadelab;
+SELECT * FROM curso;
+SELECT 
+nome, telefone
+FROM
+aluno
+WHERE 
+cidade = 'São Carlos - SP' ORDER BY nome DESC;
+SELECT 
+nome, telefone
+FROM
+aluno
+WHERE 
+cidade = lower('São Carlos - SP') ORDER BY nome DESC;
+SELECT * FROM aluno;
+SELECT 
+nome, telefone
+FROM
+aluno
+WHERE 
+cidade = upper('São Carlos - SP') ORDER BY nome DESC;
+SELECT 
+nome, telefone
+FROM
+aluno
+WHERE 
+cidade = upper('Sao Carlos - SP') ORDER BY nome DESC;
+\d+ professor;
+\d+ professor;
+SELECT nome FROM professor WHERE admissao < '1993-01-01';
+SELECT * FROM professor;
+SELECT nome FROM professor WHERE admissao < '1993-01-01';
+SELECT nome FROM professor WHERE admissao < '1993-01-01';
+SELECT nome FROM aluno LIKE nome 'J%';
+SELECT nome FROM aluno WHERE nome LIKE 'J%';
+SELECT nome FROM aluno WHERE nome LIKE 'J%';
+SELECT nome FROM aluno WHERE nome LIKE 'J%';
+SELECT * FROM curso;
+SELECT d.nome FROM disciplina d, curso c, disciplinacurso dp WHERE c.nome = 'CIENCIA DA COMPUTACAO' and dp.numcurso = c.numcurso AND dp.numdisp = d.numdisp;
+SELECT c.nome FROM curso c, disciplina d, disciplinacurso dp
+WHERE disciplina = 'CALCULO NUMERICO' and 
+dp.numcurso = c.numcurso and
+dp.numdisp  = d.numdisp;
+SELECT c.nome FROM curso c, disciplina d, disciplinacurso dp
+WHERE d.nome = 'CALCULO NUMERICO' and 
+dp.numcurso = c.numcurso and
+dp.numdisp  = d.numdisp;
+SELECT nome FROM aluno;
+SELECT d.nome FROM disciplina d, aluno al, aula a
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+a.numdisp = d.numdisp;
+SELECT d.nome FROM disciplina d, aluno al, aula a
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp;
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp;
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998';
+\d+ aula;
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998';
+SELECT semestre from aula;
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998';
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE
+al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.nota < ;
+SELECT nome FROM aluno;
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE
+al.nome = 'AILTON CASTRO' AND a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.nota < 7;
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998';
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998';
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND nota < 7;
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT * FROM aluno;
+SELECT nome FROM aluno;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 6;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 5;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 1;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7.0;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 8;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 10
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = a.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 10
+SELECT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE
+d.nome = 'CALCULO NUMERICO' AND  a.numaluno = al.numaluno
+AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT d.nome FROm disciplina d, professor p, aula a 
+WHERE d.numdisp = a.numdisp AND p.nome = 'RAMON TRAVANTI' AND a.numfunc = p.numfunc;
+SELECT DISTINCT d.nome FROm disciplina d, professor p, aula a 
+WHERE d.numdisp = a.numdisp AND p.nome = 'RAMON TRAVANTI' AND a.numfunc = p.numfunc;
+SELECT DISTINCT p.nome FROm disciplina d, professor p, aula a 
+WHERE d.numdisp = a.numdisp AND d.nome = 'BANCO DE DADOS' AND a.numfunc = p.numfunc;
+SELECT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p
+aula a WHERE a.numaluno = al.numaluno AND a.semestre = '01/1998';
+SELECT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND a.semestre = '01/1998';
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND a.semestre = '01/1998';
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND a.semestre = '01/1998' ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND p.numfunc = a.nunfunc ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND a.numfunc = p.numfunc ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND a.numfunc = p.numfunc ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome, d.nome, p.nome FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND a.numfunc = p.numfunc ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome as 'nome aluno', d.nome 'nome disciplina', p.nome 'nome do professor' FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND a.numfunc = p.numfunc ORDER BY al.nome ASC;
+SELECT DISTINCT al.nome as "nome aluno", d.nome "nome disciplina", p.nome "nome do professor" FROM aluno al, disciplina d, professor p,
+aula a WHERE a.numaluno = al.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND a.numfunc = p.numfunc ORDER BY al.nome ASC;
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, d disciplina d, aula a, aluno al
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp AND a.numcurso = c.numcurso AND a.semestre = '01/1998';
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, disciplina d, aula a, aluno al
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp AND a.numcurso = c.numcurso AND a.semestre = '01/1998';
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, disciplina d, aula a, aluno al, disciplinacurso dp
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp a.semestre = '01/1998', dp.numcurso = c.numcurso AND c.nome = 'CIENCIA DA COMPUTACAO';
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, disciplina d, aula a, aluno al, disciplinacurso dp
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp a.semestre = '01/1998' dp.numcurso = c.numcurso AND c.nome = 'CIENCIA DA COMPUTACAO';
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, disciplina d, aula a, aluno al, disciplinacurso dp
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' dp.numcurso = c.numcurso AND c.nome = 'CIENCIA DA COMPUTACAO';
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, disciplina d, aula a, aluno al, disciplinacurso dp
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND  dp.numcurso = c.numcurso AND c.nome = 'CIENCIA DA COMPUTACAO';
+SELECT al.nome as "Aluno", d.nome as "Disciplina", a.nota as "Nota" FROM curso c, disciplina d, aula a, aluno al, disciplinacurso dp
+WHERE al.numaluno = a.numaluno AND d.numdisp = a.numdisp AND a.semestre = '01/1998' AND  dp.numcurso = c.numcurso AND c.nome = 'CIENCIA DA COMPUTACAO' AND dp.numdisp = d.numdisp;
+SELECT * FROM aluno;
+SELECT nome from ALUNO;
+UPDATE aluno SET nome = 'EDVALDO CARLOS SILVA DE OLIVEIRA' WHERE nome = 'EDVALDO CARLOS SILVA';
+select nota from aula;
+SELECT * FROM aula;
+UPDATE aula nota = 10 WHERE numaluno = 111;
+UPDATE aula SET nota = 10 WHERE numaluno = 111;
+UPDATE aula SET nota = 10 WHERE numaluno = 111 AND numdisp = 1;
+select * from curso;
+UPDATE curso SET totalcreditos = 80000 WHERE numcurso = 2142;
+UPDATE curso SET totalcreditos = 8000 WHERE numcurso = 2142;
+SELECT * FROM curso;
+SELECT 
+			nome, telefone
+			FROM
+				aluno
+			WHERE 
+				cidade = upper(‘Carlos - SP’) 
+			ORDER BY nome DESC;
+SELECT 
+			nome, telefone
+			FROM
+				aluno
+			WHERE 
+				cidade = upper(‘CARLOS - SP’) 
+			ORDER BY nome DESC;
+SELECT 
+			nome, telefone
+			FROM
+				aluno
+			WHERE 
+				cidade = ‘Carlos - SP’ 
+			ORDER BY nome DESC;
+SELECT 
+			nome, telefone
+			FROM
+				aluno
+			WHERE 
+				cidade = 'CARLOS - SP' 
+			ORDER BY nome DESC;
+SELECT 
+			nome, telefone
+			FROM
+				aluno
+			WHERE 
+				cidade = 'SAO CARLOS - SP' 
+			ORDER BY nome DESC;
+SELECT nome FROM professor WHERE admissao < ‘1993-01-01’;
+SELECT nome FROM professor WHERE admissao < '1993-01-01';
+SELECT nome FROM aluno WHERE nome LIKE 'J%';
+SELECT d.nome FROM disciplina d, curso c, disciplinacurso dp WHERE c.nome = ‘CIENCIA DA COMPUTACA’ and dp.numcurso = c.numcurso AND dp.numdisp = d.numdisp;
+SELECT d.nome FROM disciplina d, curso c, disciplinacurso dp WHERE c.nome = 'CIENCIA DA COMPUTACA' and dp.numcurso = c.numcurso AND dp.numdisp = d.numdisp;
+SELECT d.nome FROM disciplina d, curso c, disciplinacurso dp WHERE c.nome = 'CIENCIA DA COMPUTACAO' and dp.numcurso = c.numcurso AND dp.numdisp = d.numdisp;
+SELECT c.nome FROM curso c, disciplina d, disciplinacurso dp WHERE d.nome = ‘CALCULO NUMERICO’ and dp.numcurso = c.numcurso and dp.numdisp  = d.numdisp;
+SELECT c.nome FROM curso c, disciplina d, disciplinacurso dp WHERE d.nome = 'CALCULO NUMERICO' and dp.numcurso = c.numcurso and dp.numdisp  = d.numdisp;
+ SELECT d.nome FROM disciplina d, aluno al, aula a WHERE al.nome = ‘MARCOS JOAO CASANOVA’ AND a.numaluno = al.numaluno AND a.numdisp = d.numdisp AND a.semestre = ‘01/1998’;
+ SELECT d.nome FROM disciplina d, aluno al, aula a WHERE al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno AND a.numdisp = d.numdisp AND a.semestre = ‘01/1998’;
+ SELECT d.nome FROM disciplina d, aluno al, aula a WHERE al.nome = 'MARCOS JOAO CASANOVA' AND a.numaluno = al.numaluno AND a.numdisp = d.numdisp AND a.semestre = '01/1998';
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE al.nome = ‘AILTON CASTRO’ AND a.numaluno = al.numaluno AND a.numdisp = d.numdisp and a.nota < 7;
+SELECT d.nome FROM disciplina d, aluno al, aula a WHERE al.nome = 'AILTON CASTRO' AND a.numaluno = al.numaluno AND a.numdisp = d.numdisp and a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE d.nome = ‘CALCULO NUMERICO’ AND  a.numaluno = al.numaluno AND a.numdisp = d.numdisp and a.semestre = &apos;01/1998&apos; AND a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE d.nome = 'CALCULO NUMERICO' AND  a.numaluno = al.numaluno AND a.numdisp = d.numdisp and a.semestre = &apos;01/1998&apos; AND a.nota < 7;
+SELECT DISTINCT al.nome FROM disciplina d, aluno al, aula a WHERE d.nome = 'CALCULO NUMERICO' AND  a.numaluno = al.numaluno AND a.numdisp = d.numdisp and a.semestre = '01/1998' AND a.nota < 7;
+SELECT DISTINCT d.nome FROm disciplina d, professor p, aula a WHERE d.numdisp = a.numdisp AND p.nome = &apos;RAMON TRAVANTI&apos; AND a.numfunc = p.numfunc;
+SELECT DISTINCT d.nome FROm disciplina d, professor p, aula a WHERE d.numdisp = a.numdisp AND p.nome = 'RAMON TRAVANTI' AND a.numfunc = p.numfunc;
+SELECT DISTINCT p.nome FROm disciplina d, professor p, aula a WHERE d.numdisp = a.numdisp AND d.nome = ‘BANCO DE DADOS’; AND a.numfunc = p.numfunc;
+SELECT DISTINCT p.nome FROm disciplina d, professor p, aula a WHERE d.numdisp = a.numdisp AND d.nome = 'BANCO DE DADOS' AND a.numfunc = p.numfunc;
+\dn+
+\dn
+\dt public
+set search_path TO public
+;
+\dt
+SELECT * FROM usuarios;
+\dt usuarios;
+\ds usuarios;
+\s usuarios;

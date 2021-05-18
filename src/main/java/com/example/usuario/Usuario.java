@@ -1,9 +1,19 @@
 package com.example.usuario;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 50, nullable = false)
     private String nomeCompleto;
+
+    @Column(length = 100, nullable = false)
     private String email;
 
     public Usuario() {
