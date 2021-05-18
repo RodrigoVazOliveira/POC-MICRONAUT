@@ -39,7 +39,7 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario atualizarUsuarioParcialmente(Usuario usuario) {
+    public Void atualizarUsuarioParcialmente(Usuario usuario) {
         Usuario usuarioSalvo = procurarUsuarioPeloId(usuario.getId());
 
         if (usuario.getNomeCompleto() != null) {
@@ -50,6 +50,6 @@ public class UsuarioService {
             usuarioSalvo.setEmail(usuario.getEmail());
         }
 
-        return usuarioRepository.save(usuarioSalvo);
+        usuarioRepository.save(usuarioSalvo);
     }
 }

@@ -29,4 +29,9 @@ public class UsuarioRestController {
         Iterable<Usuario> usuarios = usuarioService.obterTodosUsuarios();
         return HttpResponse.status(HttpStatus.OK).body(usuarios);
     }
+
+    @Patch
+    public Void atualizarUsuarioParcialmente(@Body Usuario usuario) {
+        usuarioService.atualizarUsuarioParcialmente(usuario);
+    }
 }
